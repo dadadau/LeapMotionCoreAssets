@@ -23,6 +23,7 @@ using UnityEngine;
 using System.Collections;
 using System.Threading;
 using VR = UnityEngine.VR;
+using XR = UnityEngine.XR;
 
 /// <summary>
 /// Contains information about the user's preferences and body dimensions.
@@ -156,7 +157,7 @@ public class OVRProfile : Object
 		locale = jniOvr.CallStatic<string>("getProfileLocale");
 #endif
 
-		if (VR.VRDevice.isPresent)
+		if (XR.XRDevice.isPresent)
 		{
 			ipd = OVRPlugin.ipd;
 			eyeHeight = OVRPlugin.eyeHeight;

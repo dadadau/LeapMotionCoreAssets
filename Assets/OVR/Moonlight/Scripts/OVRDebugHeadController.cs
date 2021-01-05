@@ -22,6 +22,7 @@ limitations under the License.
 using UnityEngine;
 using VR = UnityEngine.VR;
 using System.Collections;
+using XR = UnityEngine.XR;
 
 /// <summary>
 /// This is a simple behavior that can be attached to a parent of the CameraRig in order
@@ -91,7 +92,7 @@ public class OVRDebugHeadController : MonoBehaviour
 			transform.position += fwdMove + strafeMove;
 		}
 
-		if ( !VR.VRDevice.isPresent && ( AllowYawLook || AllowPitchLook ) )
+		if ( !XR.XRDevice.isPresent && ( AllowYawLook || AllowPitchLook ) )
 		{
 			Quaternion r = transform.rotation;
 			if ( AllowYawLook )

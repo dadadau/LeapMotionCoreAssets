@@ -24,6 +24,7 @@ using System;
 using System.Collections;
 using System.Runtime.InteropServices;
 using VR = UnityEngine.VR;
+using XR = UnityEngine.XR;
 
 /// <summary>
 /// Add OVROverlay script to an object with a Quad mesh filter to have the quad
@@ -105,8 +106,8 @@ public class OVROverlay : MonoBehaviour
 		Transform camPose = Camera.current.transform;
 		Matrix4x4 modelToCamera = camPose.worldToLocalMatrix * transform.localToWorldMatrix;
 
-		Vector3 headPos = VR.InputTracking.GetLocalPosition(VR.VRNode.Head);
-		Quaternion headOrt = VR.InputTracking.GetLocalRotation(VR.VRNode.Head);
+		Vector3 headPos = XR.InputTracking.GetLocalPosition(XR.XRNode.Head);
+		Quaternion headOrt = XR.InputTracking.GetLocalRotation(XR.XRNode.Head);
 		Matrix4x4 cameraToStart = Matrix4x4.TRS(headPos, headOrt, Vector3.one);
 
 		Matrix4x4 modelToStart = cameraToStart * modelToCamera;

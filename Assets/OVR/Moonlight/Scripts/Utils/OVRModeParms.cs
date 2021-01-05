@@ -21,6 +21,7 @@ limitations under the License.
 
 using UnityEngine;
 using VR = UnityEngine.VR;
+using XR = UnityEngine.XR;
 
 /// <summary>
 /// Logs when the application enters power save mode and allows you to a low-power CPU/GPU level with a button press.
@@ -41,7 +42,7 @@ public class OVRModeParms : MonoBehaviour
 	/// </summary>
 	void Start()
 	{		
-		if (!VR.VRDevice.isPresent)
+		if (!XR.XRDevice.isPresent)
 		{
 			enabled = false;
 			return;

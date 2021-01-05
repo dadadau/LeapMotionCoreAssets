@@ -22,6 +22,7 @@ limitations under the License.
 using UnityEngine;
 using VR = UnityEngine.VR;
 using System.Collections;
+using XR = UnityEngine.XR;
 
 /// <summary>
 /// Shows the Oculus plaform UI.
@@ -170,7 +171,7 @@ public class OVRPlatformMenu : MonoBehaviour
 	/// </summary>
 	void Awake()
 	{
-		if (!VR.VRDevice.isPresent)
+		if (!XR.XRDevice.isPresent)
 		{
 			enabled = false;
 			return;

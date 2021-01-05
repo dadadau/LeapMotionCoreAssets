@@ -2,6 +2,7 @@
 using UnityEngine.VR;
 using System;
 using System.Collections.Generic;
+using XR = UnityEngine.XR;
 
 /// <summary>
 /// Implements spatial alignment of cameras and synchronization with images
@@ -196,7 +197,7 @@ public class LeapVRTemporalWarping : MonoBehaviour {
 
   protected void Update() {
     if (Input.GetKeyDown(recenter)) {
-      InputTracking.Recenter();
+      XR.InputTracking.Recenter();
     }
 
     // Manual Time Alignment
@@ -231,8 +232,8 @@ public class LeapVRTemporalWarping : MonoBehaviour {
     long leapNow = HandController.Main.GetLeapController().Now();
     _history.Add(new TransformData() {
       leapTime = leapNow,
-      localPosition = InputTracking.GetLocalPosition(VRNode.CenterEye),
-      localRotation = InputTracking.GetLocalRotation(VRNode.CenterEye)
+      localPosition = XR.InputTracking.GetLocalPosition(XR.XRNode.CenterEye),
+      localRotation = XR.InputTracking.GetLocalRotation(XR.XRNode.CenterEye)
     });
 
     // Reduce history length
@@ -247,8 +248,8 @@ public class LeapVRTemporalWarping : MonoBehaviour {
       return;
     }
 
-    Vector3 currCenterPos = _trackingAnchor.TransformPoint(InputTracking.GetLocalPosition(VRNode.CenterEye));
-    Quaternion currCenterRot = _trackingAnchor.rotation * InputTracking.GetLocalRotation(VRNode.CenterEye);
+    Vector3 currCenterPos = _trackingAnchor.TransformPoint(XR.InputTracking.GetLocalPosition(XR.XRNode.CenterEye));
+    Quaternion currCenterRot = _trackingAnchor.rotation * XR.InputTracking.GetLocalRotation(XR.XRNode.CenterEye);
 
     //Get the transform at the time when the latest image was captured
     long rewindTime = HandController.Main.GetFrame().Timestamp;

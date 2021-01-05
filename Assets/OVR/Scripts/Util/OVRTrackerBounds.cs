@@ -23,7 +23,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using VR = UnityEngine.VR;
-
+using XR = UnityEngine.XR;
 /// <summary>
 /// Dalculates distance to tracking volume and displays arrows or icons when close.
 /// </summary>
@@ -152,8 +152,8 @@ public class OVRTrackerBounds : MonoBehaviour
 
         // Transform point into volume space
 		OVRPose headPose;
-		headPose.position = VR.InputTracking.GetLocalPosition(VR.VRNode.Head);
-		headPose.orientation = VR.InputTracking.GetLocalRotation(VR.VRNode.Head);
+		headPose.position = XR.InputTracking.GetLocalPosition(XR.XRNode.Head);
+		headPose.orientation = XR.InputTracking.GetLocalRotation(XR.XRNode.Head);
 
 		Vector3 localPos = trackerMat.inverse.MultiplyPoint(headPose.position);
 

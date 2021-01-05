@@ -22,7 +22,7 @@ limitations under the License.
 using UnityEngine;
 using System.Collections;
 using VR = UnityEngine.VR;
-
+using XR = UnityEngine.XR;
 /// <summary>
 /// Sample that allows you to play with various VR settings. 
 /// </summary>
@@ -118,8 +118,11 @@ public class OVRSceneSampleController : MonoBehaviour
 			Cursor.visible = false; 
 			Cursor.lockState = CursorLockMode.Locked;
 #else
-            Screen.showCursor = false;
-            Screen.lockCursor = true;
+            UnityEngine.Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            //Screen.showCursor = false;
+            //Screen.lockCursor = true;
+
 #endif
         }
 
@@ -153,7 +156,7 @@ public class OVRSceneSampleController : MonoBehaviour
             Screen.fullScreen = !Screen.fullScreen;
 
         if (Input.GetKeyDown(KeyCode.M))
-			VR.VRSettings.showDeviceView = !VR.VRSettings.showDeviceView;
+			XR.XRSettings.showDeviceView = !XR.XRSettings.showDeviceView;
 
 #if !UNITY_ANDROID || UNITY_EDITOR
         // Escape Application

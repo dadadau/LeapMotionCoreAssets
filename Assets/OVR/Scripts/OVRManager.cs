@@ -25,6 +25,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using VR = UnityEngine.VR;
+using XR = UnityEngine.XR;
 
 /// <summary>
 /// Configuration data for Oculus virtual reality.
@@ -103,7 +104,7 @@ public class OVRManager : MonoBehaviour
 	public static bool isHSWDisplayed
 	{
 		get {			
-			if (!VR.VRDevice.isPresent)
+			if (!XR.XRDevice.isPresent)
 				return false;
 
 			return OVRPlugin.hswVisible;
@@ -115,7 +116,7 @@ public class OVRManager : MonoBehaviour
 	/// </summary>
 	public static void DismissHSWDisplay()
 	{
-		if (!VR.VRDevice.isPresent)
+		if (!XR.XRDevice.isPresent)
 			return;
 
 		OVRPlugin.DismissHSW();
@@ -127,14 +128,14 @@ public class OVRManager : MonoBehaviour
 	public bool chromatic
 	{
 		get {
-			if (!VR.VRDevice.isPresent)
+			if (!XR.XRDevice.isPresent)
 				return false;
 
 			return OVRPlugin.chromatic;
 		}
 
 		set {
-			if (!VR.VRDevice.isPresent)
+			if (!XR.XRDevice.isPresent)
 				return;
 
 			OVRPlugin.chromatic = value;
@@ -147,14 +148,14 @@ public class OVRManager : MonoBehaviour
 	public bool monoscopic
 	{
 		get {
-			if (!VR.VRDevice.isPresent)
+			if (!XR.XRDevice.isPresent)
 				return true;
 
 			return OVRPlugin.monoscopic;
 		}
 		
 		set {
-			if (!VR.VRDevice.isPresent)
+			if (!XR.XRDevice.isPresent)
 				return;
 
 			OVRPlugin.monoscopic = value;
@@ -167,14 +168,14 @@ public class OVRManager : MonoBehaviour
 	public bool queueAhead
 	{
 		get {
-			if (!VR.VRDevice.isPresent)
+			if (!XR.XRDevice.isPresent)
 				return false;
 
 			return (OVRPlugin.queueAheadFraction != 0f);
 		}
 
 		set {
-			if (!VR.VRDevice.isPresent)
+			if (!XR.XRDevice.isPresent)
 				return;
 
 			OVRPlugin.queueAheadFraction = (value) ? 0.25f : 0f;
@@ -189,7 +190,7 @@ public class OVRManager : MonoBehaviour
 	public static float batteryLevel
 	{
 		get {
-			if (!VR.VRDevice.isPresent)
+			if (!XR.XRDevice.isPresent)
 				return 1f;
 
 			return OVRPlugin.batteryLevel;
@@ -204,7 +205,7 @@ public class OVRManager : MonoBehaviour
 	public static float batteryTemperature
 	{
 		get {
-			if (!VR.VRDevice.isPresent)
+			if (!XR.XRDevice.isPresent)
 				return 0f;
 
 			return OVRPlugin.batteryTemperature;
@@ -219,7 +220,7 @@ public class OVRManager : MonoBehaviour
 	public static int batteryStatus
 	{
 		get {
-			if (!VR.VRDevice.isPresent)
+			if (!XR.XRDevice.isPresent)
 				return -1;
 
 			return (int)OVRPlugin.batteryStatus;
@@ -233,7 +234,7 @@ public class OVRManager : MonoBehaviour
 	public static float volumeLevel
 	{
 		get {
-			if (!VR.VRDevice.isPresent)
+			if (!XR.XRDevice.isPresent)
 				return 0f;
 
 			return OVRPlugin.systemVolume;
@@ -353,13 +354,13 @@ public class OVRManager : MonoBehaviour
 		}
 
 		// Dispatch any events.
-		if (HMDLost != null && wasHmdPresent && !VR.VRDevice.isPresent)
+		if (HMDLost != null && wasHmdPresent && !XR.XRDevice.isPresent)
 			HMDLost();
 
-        if (HMDAcquired != null && !wasHmdPresent && VR.VRDevice.isPresent)
+        if (HMDAcquired != null && !wasHmdPresent && XR.XRDevice.isPresent)
 			HMDAcquired();
 
-        wasHmdPresent = VR.VRDevice.isPresent;
+        wasHmdPresent = XR.XRDevice.isPresent;
 
 		if (TrackingLost != null && wasPositionTracked && !tracker.isPositionTracked)
 			TrackingLost();
@@ -426,7 +427,7 @@ public class OVRManager : MonoBehaviour
 
     public static void PlatformUIConfirmQuit()
 	{
-		if (!VR.VRDevice.isPresent)
+		if (!XR.XRDevice.isPresent)
 			return;
 
 		OVRPlugin.ShowUI(OVRPlugin.PlatformUI.ConfirmQuit);
@@ -434,7 +435,7 @@ public class OVRManager : MonoBehaviour
 
     public static void PlatformUIGlobalMenu()
 	{
-		if (!VR.VRDevice.isPresent)
+		if (!XR.XRDevice.isPresent)
 			return;
 
 		OVRPlugin.ShowUI(OVRPlugin.PlatformUI.GlobalMenu);

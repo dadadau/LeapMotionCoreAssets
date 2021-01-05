@@ -21,6 +21,7 @@ limitations under the License.
 
 using UnityEngine;
 using VR = UnityEngine.VR;
+using XR = UnityEngine.XR;
 
 /// <summary>
 /// Toggles an on-screen debug graph with VR rendering and performance statistics.
@@ -50,7 +51,7 @@ public class OVRDebugGraph : MonoBehaviour
 	/// </summary>
 	void Start()
 	{
-		if (!VR.VRDevice.isPresent)
+		if (!XR.XRDevice.isPresent)
 		{
 			enabled = false;
 			return;

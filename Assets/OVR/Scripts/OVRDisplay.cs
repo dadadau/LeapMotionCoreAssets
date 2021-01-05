@@ -24,6 +24,7 @@ using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using VR = UnityEngine.VR;
+using XR = UnityEngine.XR;
 
 /// <summary>
 /// Manages an Oculus Rift head-mounted display (HMD).
@@ -98,7 +99,7 @@ public class OVRDisplay
 	/// </summary>
 	public void RecenterPose()
 	{
-        VR.InputTracking.Recenter();
+        XR.InputTracking.Recenter();
 
 		if (RecenteredPose != null)
 		{
@@ -112,7 +113,7 @@ public class OVRDisplay
 	public Vector3 acceleration
 	{
 		get {			
-			if (!VR.VRDevice.isPresent)
+			if (!XR.XRDevice.isPresent)
 				return Vector3.zero;
 
             OVRPose ret = OVRPlugin.GetEyeAcceleration(OVRPlugin.Eye.None).ToOVRPose();
@@ -126,7 +127,7 @@ public class OVRDisplay
 	public Vector3 angularVelocity
 	{
 		get {
-			if (!VR.VRDevice.isPresent)
+			if (!XR.XRDevice.isPresent)
 				return Vector3.zero;
 
 			OVRPose ret = OVRPlugin.GetEyeVelocity(OVRPlugin.Eye.None).ToOVRPose();
@@ -137,7 +138,7 @@ public class OVRDisplay
 	/// <summary>
 	/// Gets the resolution and field of view for the given eye.
 	/// </summary>
-    public EyeRenderDesc GetEyeRenderDesc(VR.VRNode eye)
+    public EyeRenderDesc GetEyeRenderDesc(XR.XRNode eye)
 	{
 		return eyeDescs[(int)eye];
 	}
@@ -148,7 +149,7 @@ public class OVRDisplay
 	public LatencyData latency
 	{
 		get {
-			if (!VR.VRDevice.isPresent)
+			if (!XR.XRDevice.isPresent)
 				return new LatencyData();
 
             string latency = OVRPlugin.latency;
@@ -171,13 +172,13 @@ public class OVRDisplay
 
 	private void UpdateTextures()
 	{
-		ConfigureEyeDesc(VR.VRNode.LeftEye);
-        ConfigureEyeDesc(VR.VRNode.RightEye);
+		ConfigureEyeDesc(XR.XRNode.LeftEye);
+        ConfigureEyeDesc(XR.XRNode.RightEye);
 	}
 
-    private void ConfigureEyeDesc(VR.VRNode eye)
+    private void ConfigureEyeDesc(XR.XRNode eye)
 	{
-		if (!VR.VRDevice.isPresent)
+		if (!XR.XRDevice.isPresent)
 			return;
 
 		OVRPlugin.Sizei size = OVRPlugin.GetEyeTextureSize((OVRPlugin.Eye)eye);
